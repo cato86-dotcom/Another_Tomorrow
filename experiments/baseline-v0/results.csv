@@ -1,0 +1,4 @@
+controller,hours_survived,memories_lost,write_amplification_factor,identity_forks
+original,13558,106442,1.0,0
+naive_unlock,20187,100053,1.0,0
+repaired,87299,32704,0.251,0
