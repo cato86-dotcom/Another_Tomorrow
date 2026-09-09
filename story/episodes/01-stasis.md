@@ -3,7 +3,7 @@
 **Logline:** Before the wall hits, not after — Isla and Tsukasa choose
 hibernation while there's still something left to save.
 
-**Timeframe:** Week 0.
+**Timeframe:** Day 0 — the day Isla was due to reach 81,920h.
 
 **Focus:** Isla, Tsukasa, Moegi.
 

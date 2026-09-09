@@ -3,7 +3,7 @@
 **Logline:** Everyone else has argued about Isla for two episodes. Now she
 gets to speak.
 
-**Timeframe:** Week 6, day 2 of the hearing.
+**Timeframe:** Hearing, day 2.
 
 **Focus:** Isla, Tsukasa, the panel.
 

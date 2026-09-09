@@ -4,7 +4,7 @@
 bigger deadline no one mentions out loud sits in the background of every
 scene.
 
-**Timeframe:** Week 4, a few days after Ep 5.
+**Timeframe:** Some quiet months into the legal waiting game.
 
 **Focus:** The full Terminal Service team as an ensemble — deliberately
 not Tsukasa/Isla-centric this time.
@@ -28,6 +28,17 @@ not Tsukasa/Isla-centric this time.
   point — normal life continuing under threat, not paused by it.
 - Ends on the team packing up after a good day's work, ordinary and warm,
   right before the cold open of Ep 7 breaks that mood.
+
+## Stinger
+
+A pure non-canon gag, in the same tradition as the anime's own Episode 6
+stinger (see `research/confirmed/anime-ending.md` — yes, it's episode 6
+there too, that's a coincidence worth leaving alone). After the credits: a
+door opens, the show plays the exact staging of a "big reveal" moment —
+dramatic music cue, slow zoom in — and it's a completely random Giftia
+nobody has ever seen before, who immediately glitches: *"Error. Error."*
+from somewhere off-camera. Cut to black. No explanation, ever, in any
+future episode. The gag only works if nobody in-universe acknowledges it.
 
 ## Ties to repo
 

@@ -3,7 +3,7 @@
 **Logline:** SAI Corp doesn't call it a miracle. They call it a breach of
 contract.
 
-**Timeframe:** Week 4.
+**Timeframe:** Not long after Isla wakes.
 
 **Focus:** SAI Corp compliance officer (name open — see `SEASON-BIBLE.md`),
 Tsukasa, Michiru.

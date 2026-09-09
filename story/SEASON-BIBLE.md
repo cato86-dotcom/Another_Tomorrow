@@ -13,9 +13,25 @@ be *allowed* to keep her, once she's back.
 
 ## Timeline discipline
 
-Roughly six in-story weeks from hibernation (Ep 1) to verdict (Ep 11), plus
-an unspecified "later" for Ep 12. Not years. If a future draft needs more
-time for a subplot, compress the subplot — don't stretch the timeline.
+Roughly the nine months canon itself already established — see
+`research/confirmed/anime-ending.md`. That's the gap the anime gives
+Tsukasa between Isla's death and meeting a new, unnamed Giftia partner
+whose face is never shown. This season spends that same nine months on a
+different choice: instead of learning to live without her, he spends it
+fighting to keep her. Individual episodes don't need exact week numbers —
+"early on," "the long middle," "as the hearing approaches" is precise
+enough. What matters is landing on nine months by the finale, not the
+padding in between.
+
+## Connecting to the anime's own ending
+
+See `research/confirmed/anime-ending.md` for the sourcing. The short
+version: this season doesn't erase or reject the anime's ending — Isla's
+death in that version is real, and nothing here pretends otherwise. It
+uses a gap the anime left on purpose: nine months later, Tsukasa is
+introduced to a new Giftia partner whose face the camera never shows.
+`episodes/12-next-weekend.md` opens on that exact scene, from a different
+angle. It was never established that it isn't her.
 
 ## Roster
 
@@ -73,11 +89,27 @@ now, the end," it's not done yet.
 
 ## Tone notes
 
+- The Giftia's decline mirrors dementia and terminal illness closely enough
+  that it isn't just a genre device. Write Isla's condition, the team's
+  urgency, and SAI Corp's clinical detachment with the same care you'd want
+  extended to a real person's decline — see `README.md`'s "Why this
+  exists" section for the fuller reasoning. Comedy in filler episodes (Ep
+  6) should sit alongside that, never undercut it.
 - No mustache-twirling villain. SAI Corp's compliance officer is doing
   their job correctly, by their own rules — that's what makes it worth
   fighting, not a moral failing on their part.
 - Keep the comedy. Terminal Service filler episodes (Ep 6) exist so the
-  season doesn't become thirteen hours of hearing prep.
+  season doesn't become thirteen hours of hearing prep. Canon already
+  established this couple is funny on purpose — see
+  `research/confirmed/anime-ending.md`'s "confirmed comedic thread" section
+  — so don't undersell that side of it.
+- **Stingers are allowed.** The anime itself used post-episode stingers for
+  pure gags with zero plot weight (its own Episode 6 stinger is the model —
+  see `research/confirmed/anime-ending.md`). This season can do the same.
+  Ep 6's stinger is the example on file. Rule of thumb: a stinger earns its
+  place if it's funny specifically *because* nobody in-universe reacts to
+  it. It never gets an explanation, and it never touches Ep 12's reveal —
+  that one has to be played straight for the earlier restraint to pay off.
 - The simulator's actual output is canon-adjacent evidence in-story
   (Ep 8, 10). If someone changes the tuning in `simulator/`, the numbers
   quoted in those episodes should be revisited to match — flagged here so

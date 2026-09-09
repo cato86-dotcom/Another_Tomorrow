@@ -3,7 +3,7 @@
 **Logline:** The hearing begins. This half belongs to the evidence, not
 yet to Isla.
 
-**Timeframe:** Week 6, day 1 of the hearing.
+**Timeframe:** Roughly nine months after Day 0 — hearing, day 1.
 
 **Focus:** Moegi, Eru, SAI Corp's counsel, the presiding panel.
 

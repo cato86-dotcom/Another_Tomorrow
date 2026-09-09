@@ -3,7 +3,7 @@
 **Logline:** The repair almost works the first time. Almost isn't good
 enough, and the team has to say so out loud.
 
-**Timeframe:** Weeks 2–3.
+**Timeframe:** The long middle stretch — several months of research, most of it tedious on purpose.
 
 **Focus:** Moegi, Eru, Tsukasa. Isla is present only as a silent chamber in
 the background of every scene.

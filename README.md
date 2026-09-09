@@ -31,6 +31,41 @@ and the rest of Terminal Service.
 
 Full technical hypothesis: [`spec/ALMA-HYPOTHESIS.md`](./spec/ALMA-HYPOTHESIS.md)
 
+## Why this exists
+
+The anime gives Isla a fixed, countable death — she knows the exact hour it
+happens. Real terminal illness rarely works that way; even a diagnosis
+usually leaves a range, not a date. In a strange way, a known date is
+worse than either terminal illness or ordinary mortality: there's no
+uncertainty left to actually live inside. A fix that just deleted the
+number would still leave her flattened to a countdown, only a longer one.
+That's why `spec/ALMA-HYPOTHESIS.md`'s repair deliberately produces an
+*uncertain* lifespan (see its design note on distributed failure
+thresholds), not a certified-forever one. Nobody, including Isla, gets to
+know the date again. That's not a weaker ending — it's the ordinary one
+everyone else already lives with, and the show never let her have it.
+
+The Giftia's decline before that cutoff — memories going first, personality
+following — reads as more than a plot mechanism to anyone who has watched a
+person's mind go before their body does. This project doesn't try to be
+subtle about that. "Zero memories lost" in `spec/ALMA-HYPOTHESIS.md` isn't
+a technical flourish; it's the actual bar that matters, and the whole
+`experiments/` habit of logging failures instead of hiding them exists
+because pretending a fix works when it doesn't is its own kind of harm.
+
+The official material never fully closed this door, either. The visual
+novel has its own separate hibernation route where Isla is found again
+with no mechanism given. The anime's own epilogue introduces Tsukasa's
+"new Giftia partner" nine months later — and never shows her face. See
+`research/confirmed/anime-ending.md` for the sourcing. That's not nothing.
+That's a door left ajar. This project walks through it.
+
+And the last thing worth saying plainly: people don't stop fighting for
+someone just because the fight is hard, as long as there's still something
+left to fight *for*. Isla's canon ending accepts her death because canon
+gives Tsukasa no alternative. This project exists because the source
+material — deliberately or not — gave fans one anyway.
+
 ## Repo layout
 
 ```
@@ -74,9 +109,26 @@ answer we wanted yet.
 
 ## Contributing
 
-Fixing the simulator, tightening the source register, or drafting an episode
-are all welcome — see [`CONTRIBUTING.md`](./CONTRIBUTING.md), including the
-scope guard on Lsla's role in the story.
+New to GitHub, or not sure you'll do it "right"? `CONTRIBUTING.md` opens
+with a section just for that — short version: nothing here is final, and
+you can't break this by trying. Fixing the simulator, tightening the
+source register, or drafting an episode are all welcome — see
+[`CONTRIBUTING.md`](./CONTRIBUTING.md), including the scope guard on Lsla's
+role in the story.
+
+## Supporting real research and care
+
+This project is fiction. Lewy body dementia and other conditions that take
+memory and identity before they take anything else are not. If anything
+above resonated, consider supporting an organization that funds research
+into it and supports the families actually living with it:
+
+- [Lewy Body Dementia Association](https://lbda.org/donate) (US, 501(c)(3))
+- [Lewy Body Society](https://www.lewybody.org/join-in/donate/) (UK,
+  registered charity 1114579 / SC047044)
+
+No pressure beyond this paragraph — just leaving the door open, the same
+way this whole project started.
 
 ## License
 

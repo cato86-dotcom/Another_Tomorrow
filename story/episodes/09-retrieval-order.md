@@ -3,7 +3,7 @@
 **Logline:** SAI Corp stops reviewing and starts acting. The hearing is
 suddenly not guaranteed to happen before they do.
 
-**Timeframe:** Week 5, days before Ep 10.
+**Timeframe:** Just before the hearing date.
 
 **Focus:** The full team; SAI Corp compliance officer returns.
 

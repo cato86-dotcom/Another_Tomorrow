@@ -3,7 +3,7 @@
 **Logline:** Lsla comes back once — not to help save Isla, but to tell
 Tsukasa something only she can.
 
-**Timeframe:** Week 5.
+**Timeframe:** Deep into the legal fight, months before the hearing.
 
 **Focus:** Lsla (second and final appearance — see `characters/lsla.md`),
 Tsukasa.

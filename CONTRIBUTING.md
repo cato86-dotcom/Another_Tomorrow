@@ -1,7 +1,20 @@
 # Contributing to project-81920
 
-Thanks for reading this before opening a PR. Two guardrails matter more than
-style here:
+Thanks for reading this before opening a PR.
+
+**If you're new to GitHub: nothing here is set in stone, and you can't
+break this by trying.** Every episode outline, every parameter in the
+simulator, every line in the season bible is a proposal, not a ruling —
+including the ones that sound confident. If you're not sure how to open a
+pull request, or you're worried about getting the git commands wrong, open
+an Issue instead and just describe the idea in plain language; someone can
+help turn it into a PR. Getting something "wrong" here just means someone
+suggests a change — it doesn't cost anything and nobody's going to be
+annoyed about it. The worst realistic outcome of a mistake is a comment
+asking you to adjust something, same as everyone else who's contributed so
+far, including the people who set the whole thing up.
+
+Two guardrails matter more than style here:
 
 ## 1. Label your sources
 
@@ -47,5 +60,10 @@ python3 -m simulator.alma_sim.run_experiment --seed 81920
 
 ## 4. Timeline discipline (story contributions)
 
-Keep the in-story time gap short — weeks, not years. A multi-year skip turns
-this into a different continuity, which isn't the goal.
+The season spans roughly nine months — the same gap the anime itself uses
+between Isla's death and Tsukasa meeting a new, unnamed partner. See
+`story/SEASON-BIBLE.md`'s "Connecting to the anime's own ending" for why
+that number specifically matters and isn't arbitrary. Individual episodes
+don't need exact week numbers, but the season as a whole shouldn't drift
+past that nine-month mark — a multi-year skip turns this into a different
+continuity, which isn't the goal.

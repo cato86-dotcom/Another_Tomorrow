@@ -3,7 +3,7 @@
 **Logline:** Saving Isla was the technical problem. Proving it, on the
 record, to people who don't want to believe it, is a different one.
 
-**Timeframe:** Week 5, continuing from Ep 7.
+**Timeframe:** Following directly from Ep 7.
 
 **Focus:** Moegi, Eru, Michiru, Tsukasa.
 

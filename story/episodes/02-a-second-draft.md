@@ -4,7 +4,7 @@
 It does anyway, and everything the team thought they knew about "saving"
 Isla turns out to be wrong.
 
-**Timeframe:** Week 1.
+**Timeframe:** Early in the repair project, within the first weeks.
 
 **Focus:** Lsla (first of two appearances — see `characters/lsla.md`),
 Moegi, Eru, Tsukasa.

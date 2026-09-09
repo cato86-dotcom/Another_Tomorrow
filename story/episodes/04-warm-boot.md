@@ -2,7 +2,7 @@
 
 **Logline:** She wakes up. That's the whole episode, and it's enough.
 
-**Timeframe:** Week 3, days later.
+**Timeframe:** The day the repair succeeds.
 
 **Focus:** Isla, Tsukasa.
 
@@ -20,6 +20,11 @@
   happen to her again mid-shift.
 - No dialogue about Lsla yet — deliberately withheld. That conversation
   belongs to a later, quieter episode, not this one.
+- A small deliberate callback: at some point, someone (Michiru, probably)
+  jokingly asks if Isla and Tsukasa are going to go back to "trying to
+  surprise each other" — the canon running bit from their early
+  relationship (see `research/confirmed/anime-ending.md`). Neither of them
+  answers directly. That's the joke.
 - The rest of the episode is small and unhurried: her first meal back,
   Michiru and Kazuki visiting separately rather than as a group scene,
   Zack saying something inappropriate and Isla laughing at it, which is
