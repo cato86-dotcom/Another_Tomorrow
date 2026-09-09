@@ -20,17 +20,23 @@ needs to finish a real stabilization method.
 A candidate fix is only "working" if, in the simulator, it satisfies **all**
 of the following — not just the headline number:
 
-- [ ] Zero identity forks — no snapshot/restore path exists anywhere in the
+- [x] Zero identity forks — no snapshot/restore path exists anywhere in the
       controller; there is structurally no way to produce a second instance
-- [ ] Zero memories lost after the fix is applied
-- [ ] Original causal chain never broken
-- [ ] Survives past `t = 81,920` hours without new instability
-- [ ] *(stretch)* explains why earlier Giftia deaths weren't just "a
-      license," but a solvable engineering problem nobody had solved yet
+- [x] Zero memories lost after the fix is applied — confirmed 200/200 seeds,
+      `experiments/tuned-v1/`
+- [x] Original causal chain never broken
+- [x] Survives past `t = 81,920` hours without new instability — confirmed
+      200/200 seeds, `experiments/tuned-v1/`
+- [ ] *(stretch, still open)* explains why earlier Giftia deaths weren't
+      just "a license," but a solvable engineering problem nobody had
+      solved yet — see the design note below, not yet written into `story/`
 
 A fix that merely removes the artificial deadline (see `naive_unlock` in the
 simulator) does **not** satisfy this list, even if the unit keeps running —
-see `experiments/baseline-v0/notes.md` for why.
+see `experiments/baseline-v0/notes.md` for why. One open caveat on the
+`tuned-v1` result: memories still in the write buffer at the exact instant
+of shutdown aren't modeled — see `experiments/tuned-v1/notes.md`'s "Known
+limitation" section before calling this fully solved.
 
 ## Design note: why cell failure is a distribution, not a constant
 

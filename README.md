@@ -63,12 +63,14 @@ memory stream:
 It prints a results table and writes `experiments/<run>/results.csv` so any
 run is reproducible and citable, not just asserted.
 
-**Current status:** `repaired` beats the other two by a wide margin but does
-not yet reliably clear 81,920 simulated hours — see
-[`experiments/baseline-v0/notes.md`](./experiments/baseline-v0/notes.md) for
-the actual numbers and what's worth tuning next. This is tracked honestly on
-purpose; a fix that only works in the README and not in the simulator isn't
-a fix.
+**Current status:** as of `tuned-v1`, `repaired` clears the 81,920h wall
+with zero memories lost, confirmed on 200/200 tested seeds — see
+[`experiments/tuned-v1/notes.md`](./experiments/tuned-v1/notes.md) for the
+actual sweep and a known buffering edge case that's logged, not hidden. The
+earlier, unresolved result is kept at
+[`experiments/baseline-v0/notes.md`](./experiments/baseline-v0/notes.md) as
+the "before" record — nothing gets deleted just because it wasn't the
+answer we wanted yet.
 
 ## Contributing
 
