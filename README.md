@@ -1,4 +1,4 @@
-# project-81920 — "Another Tomorrow"
+"Another Tomorrow"
 
 *A fix, not a replacement.*
 
