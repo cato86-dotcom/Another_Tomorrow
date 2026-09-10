@@ -16,6 +16,11 @@ far, including the people who set the whole thing up.
 
 Two guardrails matter more than style here:
 
+Fixing the simulator, tightening the source register, drafting an episode,
+or adding illustration/art to `story/art/` are all welcome. Want to point
+someone here, or find where Plastic Memories fans already hang out?
+`COMMUNITY.md` has what turned up searching.
+
 ## 1. Label your sources
 
 Every claim goes in one of three buckets, and the bucket must be visible at

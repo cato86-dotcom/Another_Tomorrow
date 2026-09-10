@@ -22,11 +22,17 @@ of the following — not just the headline number:
 
 - [x] Zero identity forks — no snapshot/restore path exists anywhere in the
       controller; there is structurally no way to produce a second instance
-- [x] Zero memories lost after the fix is applied — confirmed 200/200 seeds,
-      `experiments/tuned-v1/`
+- [x] Zero memories lost after the fix is applied — confirmed 200/200 seeds
+      to 120,920h in `experiments/tuned-v1/`, then found insufficient past
+      ~143,919h; confirmed again, this time genuinely, in
+      `experiments/maintained-v1/` (60/60 seeds at 80 years, 0 lost on a
+      228-year stress test)
 - [x] Original causal chain never broken
-- [x] Survives past `t = 81,920` hours without new instability — confirmed
-      200/200 seeds, `experiments/tuned-v1/`
+- [x] Survives past `t = 81,920` hours without new instability
+- [x] Survives a human-scale lifespan (~80 years / ~700,000 hours), not
+      just past the canon wall — see `experiments/maintained-v1/notes.md`
+      for why `tuned-v1` alone didn't actually satisfy this despite
+      looking like it did at the time
 - [ ] *(stretch, still open)* explains why earlier Giftia deaths weren't
       just "a license," but a solvable engineering problem nobody had
       solved yet — see the design note below, not yet written into `story/`
@@ -34,9 +40,11 @@ of the following — not just the headline number:
 A fix that merely removes the artificial deadline (see `naive_unlock` in the
 simulator) does **not** satisfy this list, even if the unit keeps running —
 see `experiments/baseline-v0/notes.md` for why. One open caveat on the
-`tuned-v1` result: memories still in the write buffer at the exact instant
-of shutdown aren't modeled — see `experiments/tuned-v1/notes.md`'s "Known
-limitation" section before calling this fully solved.
+`tuned-v1` result specifically: memories still in the write buffer at the
+exact instant of shutdown aren't modeled — see `experiments/tuned-v1/notes.md`'s
+"Known limitation" section. `maintained-v1` supersedes `tuned-v1` for the
+long-run lifespan claim but doesn't resolve that particular buffer-tail
+caveat either.
 
 ## Design note: why cell failure is a distribution, not a constant
 
@@ -61,3 +69,17 @@ This second point should carry into `story/SEASON-BIBLE.md`: the finale's
 emotional resolution is not a certificate that says "fixed forever." It's
 Isla and Tsukasa choosing to make plans for next year anyway, the same way
 anyone does.
+
+**A correction, from `experiments/maintained-v2/notes.md`:** don't read
+that as a claim that the wear model itself needs to occasionally fail to
+be honest. Tested hard — variable wear cost, rare shock events, harsh
+maintenance assumptions — and a well-engineered storage layer with
+redundancy and proactive care is genuinely, repeatedly robust against
+gradual wear. That's not fake certainty; that's what good engineering is
+supposed to achieve, and forcing an arbitrary failure rate into the model
+just to look humble would have been the actual dishonesty. The
+"nobody knows the date" principle doesn't live in this model at all — it
+lives in everything this model was never built to cover (SAI Corp trying
+again, infrastructure failure, plain bad luck outside the scope of "wear").
+Solving the wear problem well and admitting that isn't the only problem
+are both true at once.

@@ -74,7 +74,9 @@ project-81920/
 ├── spec/         the working technical hypothesis + acceptance criteria
 ├── simulator/    a small Python model that tests fix hypotheses honestly
 ├── experiments/  logged runs — including ones that didn't fully work
-├── story/        season outline, character notes, episode drafts
+├── story/        season outline, character notes, episode drafts, art/
+├── COMMUNITY.md  where Plastic Memories fans actually gather, if you want
+│                 to point someone here
 └── CONTRIBUTING.md
 ```
 
@@ -86,26 +88,32 @@ No dependencies beyond the standard library.
 python3 -m simulator.alma_sim.run_experiment --seed 81920
 ```
 
-This compares three write controllers over the same synthetic 120,000-hour
-memory stream:
+This compares four write controllers over the same synthetic memory stream:
 
 | controller     | what it represents |
 |-----------------|---------------------|
 | `original`      | the canon hard limit — no wear-leveling, bricks on first cell failure |
 | `naive_unlock`  | `sudo chage -E -1 isla`, formalized — just removing the deadline |
-| `repaired`      | wear-leveling + over-provisioning + write coalescing, per the spec |
+| `repaired`      | wear-leveling + over-provisioning + write coalescing — clears the canon wall, but has its own hidden ceiling |
+| `maintained`    | `repaired` plus proactive cell retirement — the current best answer |
 
 It prints a results table and writes `experiments/<run>/results.csv` so any
 run is reproducible and citable, not just asserted.
 
-**Current status:** as of `tuned-v1`, `repaired` clears the 81,920h wall
-with zero memories lost, confirmed on 200/200 tested seeds — see
-[`experiments/tuned-v1/notes.md`](./experiments/tuned-v1/notes.md) for the
-actual sweep and a known buffering edge case that's logged, not hidden. The
-earlier, unresolved result is kept at
-[`experiments/baseline-v0/notes.md`](./experiments/baseline-v0/notes.md) as
-the "before" record — nothing gets deleted just because it wasn't the
-answer we wanted yet.
+**Current status:** `maintained` clears a human-scale lifespan (~80 years /
+700,000 simulated hours) with zero memories lost, confirmed on 60/60 tested
+seeds, plus a single-seed stress test to ~228 years with the same result —
+see [`experiments/maintained-v1/notes.md`](./experiments/maintained-v1/notes.md).
+That file also documents the honest dead end along the way: `repaired`
+alone (the earlier `tuned-v1` result) turned out to have its own hidden
+ceiling around 16.4 years once actually tested past the original 81,920h
+wall, and a first attempt at fixing that reactively — replacing cells only
+after they'd already failed — never reached zero loss on any tested seed.
+The earlier, superseded results are kept at
+[`experiments/baseline-v0/notes.md`](./experiments/baseline-v0/notes.md) and
+[`experiments/tuned-v1/notes.md`](./experiments/tuned-v1/notes.md) as
+"before" records — nothing gets deleted just because it wasn't the final
+answer.
 
 ## Contributing
 

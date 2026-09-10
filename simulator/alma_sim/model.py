@@ -39,6 +39,32 @@ def draw_threshold(mean: float = 100.0, spread: float = 0.12) -> float:
     return max(mean * 0.6, min(mean * 1.6, raw))
 
 
+def draw_wear_cost(
+    mean: float = 1.0,
+    spread: float = 0.25,
+    shock_probability: float = 0.002,
+    shock_multiplier: float = 8.0,
+) -> float:
+    """
+    How much a single write actually costs a cell isn't fixed, and it isn't
+    just mild day-to-day noise either. Most writes cost close to `mean`
+    (ordinary variation -- ordinary lifestyle factors). But roughly
+    `shock_probability` of the time, a write draws from a much higher
+    range instead: a sudden severe event, not gradual wear. This is the
+    honest reason no maintenance margin can promise zero risk -- a finite
+    safety buffer against *gradual* wear doesn't protect against a single
+    event large enough to skip past it entirely. See
+    experiments/maintained-v2/notes.md: this is what actually introduces
+    real variance into outcomes, not just clipped day-to-day noise, which
+    turned out to be too well-behaved to ever break through any reasonable
+    maintenance margin.
+    """
+    if random.random() < shock_probability:
+        return random.uniform(mean * 3, mean * shock_multiplier)
+    raw = random.gauss(mean, mean * spread)
+    return max(mean * 0.3, min(mean * 2.5, raw))
+
+
 @dataclass
 class Cell:
     """One unit of memory substrate."""

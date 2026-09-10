@@ -1,16 +1,19 @@
 """
 run_experiment.py -- experiment runner for project-81920.
 
-Runs the three controllers over the same synthetic memory stream and writes
+Runs four controllers over the same synthetic memory stream and writes
 experiments/<run_name>/results.csv, so anyone can reproduce or challenge the
 numbers. Every cell's failure_threshold is drawn from a distribution (see
 model.draw_threshold), so re-running with a different --seed gives a
 genuinely different survival curve, not just cosmetic noise -- on purpose.
 
-Default parameters currently reflect experiments/tuned-v1/ (spare=40,
-batch=7), not the original experiments/baseline-v0/ (spare=40, batch=4).
-Pass --run-name when trying new parameters so you don't overwrite either
-historical record.
+Default parameters currently reflect experiments/maintained-v1/ (proactive
+cell retirement on top of tuned-v1's wear-leveling/over-provisioning), not
+the earlier experiments/tuned-v1/ or experiments/baseline-v0/. Default
+duration is now 700,000h (~80 years, a human-scale lifespan), not just past
+the original 81,920h wall -- see maintained-v1/notes.md for why tuned-v1
+alone wasn't enough. Pass --run-name when trying new parameters so you
+don't overwrite any historical record.
 
 Usage:
     python3 -m simulator.alma_sim.run_experiment [--seed N] [--hours N] [--run-name NAME]
@@ -23,26 +26,38 @@ import csv
 import random
 from pathlib import Path
 
-from .controllers import NaiveUnlockController, OriginalController, RepairedController
+from .controllers import (
+    MaintainedController,
+    NaiveUnlockController,
+    OriginalController,
+    RepairedController,
+)
 from .metrics import summarize
 from .model import MemoryArray
 
 DEFAULT_SEED = 81_920
-DEFAULT_TOTAL_HOURS = 120_000  # run well past the original 81,920h wall
+DEFAULT_TOTAL_HOURS = 700_000  # ~80 years -- a human-scale lifespan
 WRITES_PER_HOUR = 1
 LOGICAL_CELLS = 200
 
-# Tuned in experiments/tuned-v1/ via a 200-seed sweep: this is the smallest
-# (spare, batch) pair that cleared the 81,920h wall with zero memory loss on
-# every seed tested, not just the first one we tried. See that notes.md for
-# the sweep that ruled out smaller values (batch=4..6 all still lose memories
-# on some seeds -- "clears the wall" and "loses zero memories" are different
-# claims, and only batch>=7 satisfied both here).
+# Tuned in experiments/tuned-v1/: smallest (spare, batch) pair that cleared
+# the 81,920h wall with zero memory loss on every seed tested at the time.
+# Later found (experiments/maintained-v1/notes.md) to have a real ceiling
+# around 143,919h (~16.4 years) -- sufficient to clear canon's wall, NOT
+# sufficient on its own for a human-scale lifespan.
 SPARE_CELLS_FOR_REPAIRED = 40  # 20% over-provisioning
 BATCH_SIZE_FOR_REPAIRED = 7    # write coalescing factor
 
-DEFAULT_RUN_NAME = "tuned-v1"  # historical runs (e.g. baseline-v0) are frozen;
-                                # pass --run-name to avoid overwriting one
+# Tuned in experiments/maintained-v1/: proactive (pre-failure) cell
+# retirement, checked every REGEN_INTERVAL hours, replacing any cell that
+# has crossed RETIRE_AT_FRACTION of its own wear threshold -- before it
+# fails, not after. Confirmed zero memory loss on 60/60 seeds at 80 years,
+# and 0 lost on a single-seed 228-year stress test.
+REGEN_INTERVAL = 100
+RETIRE_AT_FRACTION = 0.8
+
+DEFAULT_RUN_NAME = "maintained-v1"  # historical runs are frozen; pass
+                                      # --run-name to avoid overwriting one
 
 
 def build_controllers(seed: int):
@@ -53,6 +68,12 @@ def build_controllers(seed: int):
         RepairedController(
             MemoryArray(LOGICAL_CELLS, SPARE_CELLS_FOR_REPAIRED),
             batch_size=BATCH_SIZE_FOR_REPAIRED,
+        ),
+        MaintainedController(
+            MemoryArray(LOGICAL_CELLS, SPARE_CELLS_FOR_REPAIRED),
+            batch_size=BATCH_SIZE_FOR_REPAIRED,
+            regen_interval=REGEN_INTERVAL,
+            retire_at_fraction=RETIRE_AT_FRACTION,
         ),
     ]
 

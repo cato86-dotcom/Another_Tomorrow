@@ -24,10 +24,11 @@ controllers.py -- three write strategies over the same MemoryArray.
 
 from __future__ import annotations
 
+import random
 from dataclasses import dataclass, field
 from typing import Optional
 
-from .model import MemoryArray
+from .model import Cell, MemoryArray, draw_wear_cost
 
 
 @dataclass
@@ -64,7 +65,7 @@ class OriginalController(BaseController):
             return
 
         idx = self.result.logical_writes % self.array.logical_size
-        ok = self.array.cells[idx].write(payload, wear_cost=1.0)
+        ok = self.array.cells[idx].write(payload, wear_cost=draw_wear_cost())
         self.result.logical_writes += 1
         self.result.internal_writes += 1
         if not ok:
@@ -85,7 +86,7 @@ class NaiveUnlockController(BaseController):
 
     def write_memory(self, hour: float, payload: str) -> None:
         idx = self.result.logical_writes % self.array.logical_size
-        ok = self.array.cells[idx].write(payload, wear_cost=1.0)
+        ok = self.array.cells[idx].write(payload, wear_cost=draw_wear_cost())
         self.result.logical_writes += 1
         self.result.internal_writes += 1
         if not ok:
@@ -100,9 +101,10 @@ class NaiveUnlockController(BaseController):
 class RepairedController(BaseController):
     name = "repaired"
 
-    def __init__(self, array: MemoryArray, batch_size: int = 4):
+    def __init__(self, array: MemoryArray, batch_size: int = 4, wear_spread: float = 0.25):
         super().__init__(array)
         self.batch_size = batch_size
+        self.wear_spread = wear_spread
         self._pending: list[str] = []
         self._rr_pointer = 0
 
@@ -129,7 +131,7 @@ class RepairedController(BaseController):
 
         idx = healthy[self._rr_pointer % len(healthy)]
         self._rr_pointer += 1
-        ok = self.array.cells[idx].write(combined, wear_cost=1.0)
+        ok = self.array.cells[idx].write(combined, wear_cost=draw_wear_cost(spread=self.wear_spread))
         self.result.internal_writes += 1
         if ok:
             return
@@ -140,7 +142,7 @@ class RepairedController(BaseController):
             self._brick(hour, lost=len(batch))
             return
         idx = healthy[self._rr_pointer % len(healthy)]
-        ok = self.array.cells[idx].write(combined, wear_cost=1.0)
+        ok = self.array.cells[idx].write(combined, wear_cost=draw_wear_cost(spread=self.wear_spread))
         self.result.internal_writes += 1
         if not ok:
             self._brick(hour, lost=len(batch))
@@ -149,3 +151,59 @@ class RepairedController(BaseController):
         if self.result.bricked_at_hour is None:  # latch once, never overwrite
             self.result.bricked_at_hour = hour
         self.result.memories_lost += lost
+
+
+class MaintainedController(RepairedController):
+    """
+    Extends RepairedController with periodic PROACTIVE maintenance: every
+    `regen_interval` hours, any cell that has crossed `retire_at_fraction`
+    of its own wear threshold gets retired and replaced with a fresh cell
+    -- before it actually fails, not after.
+
+    This exists because reactive regeneration (replace a cell only once
+    it's already dead) has a structural floor on memory loss: whichever
+    batch was mid-write when a cell crosses its threshold is lost no
+    matter how fast maintenance runs afterward -- see
+    experiments/tuned-v1/notes.md's human-lifespan follow-up for the
+    numbers that showed this. Proactive retirement (closer to real
+    S.M.A.R.T.-style predictive replacement) avoids that floor by
+    replacing cells before they can fail mid-write at all.
+
+    RepairedController alone also has a FIXED pool of cells -- no matter
+    how well wear is leveled across it, the sum of everyone's thresholds
+    is a hard ceiling. This also matches spec/ALMA-HYPOTHESIS.md's own
+    framing of Alma maintenance as continuous, not a single patch --
+    Moegi and Eru keep working on this, in-story, for exactly this reason.
+    """
+
+    name = "maintained"
+
+    def __init__(
+        self,
+        array: MemoryArray,
+        batch_size: int = 4,
+        regen_interval: int = 100,
+        retire_at_fraction: float = 0.8,
+        wear_spread: float = 0.25,
+    ):
+        super().__init__(array, batch_size=batch_size, wear_spread=wear_spread)
+        self.regen_interval = regen_interval
+        self.retire_at_fraction = retire_at_fraction
+
+    def write_memory(self, hour: float, payload: str) -> None:
+        if hour > 0 and hour % self.regen_interval == 0:
+            self._run_maintenance()
+        super().write_memory(hour, payload)
+
+    def _run_maintenance(self) -> None:
+        at_risk = [
+            i
+            for i, c in enumerate(self.array.cells)
+            if c.failed or c.wear >= self.retire_at_fraction * c.failure_threshold
+        ]
+        for i in at_risk:
+            self.array.cells[i] = Cell()
+        if self.array.healthy_indices():
+            # revived: let the controller resume attempting writes instead
+            # of staying permanently "bricked" from an earlier gap
+            self.result.bricked_at_hour = None
